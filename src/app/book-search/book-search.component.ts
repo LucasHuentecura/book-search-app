@@ -15,29 +15,41 @@ export class BookSearchComponent {
   private bookService = inject(BooksService);
 
   searchQuery: string = '';
+  selectedCategory: string = '';
+  selectedLanguage: string = '';
+
+  // Opciones obtenidas del servicio
+  categories = this.bookService.getCategories();
+  languages = this.bookService.getLanguages();
 
   // Utilizar Signals para el estado
   books = signal<any[]>([]);
   totalItems = signal(0);
   startIndex = 0;
-
   isLoading = signal(false);
   hasMoreResults = signal(true);
 
   // Para el manejo de búsqueda con debounce
   private searchTimeout: any;
 
-  onSearchChange(): void {
+  // Lógica de búsqueda que considera filtros
+  triggerSearch(): void {
     clearTimeout(this.searchTimeout);
-
-    // Resetar el estado para nueva búsqueda
     this.books.set([]);
     this.totalItems.set(0);
     this.startIndex = 0;
     this.hasMoreResults.set(true);
 
-    // Limitar llamadas a la API
     this.searchTimeout = setTimeout(() => this.fetchBooks(), 500);
+  }
+
+  onSearchChange(): void {
+    this.triggerSearch();
+  }
+
+  // Reiniciar búsqueda al cambiar filtros
+  onFilterChange(): void {
+    this.triggerSearch();
   }
 
   fetchBooks(): void {
@@ -46,7 +58,14 @@ export class BookSearchComponent {
     }
 
     this.isLoading.set(true);
-    this.bookService.searchBooks(this.searchQuery, this.startIndex).subscribe({
+
+    // Pasar parámetros al servicio
+    this.bookService.searchBooks(
+      this.searchQuery,
+      this.startIndex,
+      this.selectedCategory,
+      this.selectedLanguage
+    ).subscribe({
       next: (response) => {
         const newItems = response.items || [];
 

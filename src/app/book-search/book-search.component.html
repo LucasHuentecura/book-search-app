@@ -3,11 +3,22 @@
         class="search-input" />
 </div>
 
+<div class="filter-controls">
+    <select [(ngModel)]="selectedCategory" (ngModelChange)="onFilterChange()" class="filter-select">
+        <option value="">Categorías</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+    <select [(ngModel)]="selectedLanguage" (ngModelChange)="onFilterChange()" class="filter-select">
+        <option value="">Idiomas</option>
+        <option *ngFor="let lang of languages" [value]="lang">{{ lang.name }}</option>
+    </select>
+</div>
+
 <ng-container *ngIf="books().length > 0">
     <p class="total-results">Mostrando {{ books().length }} de {{ totalItems() }} resultados.</p>
 
     <div class="books-list">
-        <app-book-item *ngFor="let book of books(); trackBy: trackByBookId" [book]="book" />
+        <app-book-item *ngFor="let book of books(); trackBy: trackByBookId" [book]="book" [languages]="languages"/>
     </div>
 
     <div *ngIf="isLoading()" class="loading">Cargando...</div>

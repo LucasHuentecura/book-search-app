@@ -4,7 +4,21 @@
             alt="Portada de {{ book().volumeInfo?.title || 'Libro sin título' }}" loading="lazy" class="book-cover" />
     </div>
     <div class="book-info">
-        <h3>{{ book().volumeInfo?.title || 'Título no disponible' }}</h3>
-        <p class="authors">{{ (book().volumeInfo?.authors || ['Autor desconocido']).join(', ') }}</p>
+        <div class="book-titles">
+            <h3>{{ book().volumeInfo?.title || 'Título no disponible' }}</h3>
+            <h4 class="subtitle">{{ book().volumeInfo?.subtitle}}</h4>
+        </div>
+        <p class="authors">Por: <strong>{{ (book().volumeInfo?.authors || ['Autor desconocido']).join(', ') }}</strong>
+        </p>
+        <div class="book-details-footer">
+            <p class="categories">
+                <span class="detail-label">Categorías:</span>
+                {{ book().volumeInfo?.categories?.join(', ') || 'No disponible' }}
+            </p>
+            <p class="language">
+                <span class="detail-label">Idioma:</span>
+                {{ getLanguageName() }}
+            </p>
+        </div>
     </div>
 </div>
