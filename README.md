@@ -1,59 +1,21 @@
 # BookSearchApp
+>[!NOTE]
+>Este proyecto fué generado utilizando [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+## Descripción del proyecto
+Es una aplicación web de búsqueda de libros que utiliza la API pública de Google Books para permitir a los usuarios buscar, filtrar y explotar una vasta colección de títulos con un rendimiento optimizado.
 
-## Development server
+![image alt](https://github.com/LucasHuentecura/book-search-app/blob/c08d517847abe53f8cb97cd4f5d1a9d02bc178ed/Capturas/Captura%201.png)
 
-To start a local development server, run:
+### Características destacadas
+- ***Manejo de estados:*** Proporciona un mecanismos de reactividad más granular y eficiente, mejorando el rendimiento de la detección de cambios.
+- ***Carga de listas:*** Evita la re-renderización innecesaria del DOM en listas dinámicas, crucial para la carga infinita.
+- ***Carga de datos:*** Reduce drásticamente el tiempo de carga inicial al obtener solo 20 resultados a la vez, implementando @HostListener y gestión del startIndex.
+- ***Imágenes con carga diferida:*** Indica al navegador que posponga la carga de imágenes fuera del viewport, mejorando la velocidad percibida.
+- ***Búsqueda:*** Implementado con setTimeout para evitar llamadas a la API con cada pulsación de tecla, reduciendo la carga del servidor.
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Tecnologías
+- ***Framework:***Angular
+- ***Lenguaje:***TypeScript
+- ***Estilos y estructura:***CSS/HTML
+- ***Servicios Externos:*** Google Books API
