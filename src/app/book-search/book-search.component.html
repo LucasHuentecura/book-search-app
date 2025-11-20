@@ -1,0 +1,22 @@
+<div class="search-container">
+    <input [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Buscar libros (ej: Angular)"
+        class="search-input" />
+</div>
+
+<ng-container *ngIf="books().length > 0">
+    <p class="total-results">Mostrando {{ books().length }} de {{ totalItems() }} resultados.</p>
+
+    <div class="books-list">
+        <app-book-item *ngFor="let book of books(); trackBy: trackByBookId" [book]="book" />
+    </div>
+
+    <div *ngIf="isLoading()" class="loading">Cargando...</div>
+</ng-container>
+
+<div *ngIf="totalItems() === 0 && !isLoading()" class="no-results">
+    <p>No se encontraron resultados</p>
+</div>
+
+<div *ngIf="!hasMoreResults() && totalItems() > 0" class="no-results">
+    <p>Has llegado al final de los resultados</p>
+</div>
